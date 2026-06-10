@@ -1343,13 +1343,14 @@ const I18N = {
       impInjectAfter: 'Gewijzigd — wordt zichtbaar voor de deelnemer',
       impInjectApply: 'Toepassen op de SOP',
       impInjectEmpty: 'De AI leverde geen bruikbaar voorstel.',
+      impRestore: 'Herstel originele stap (en verwijder deze onvolkomenheid)',
       envSignals: 'Omgevingssignalen',
       envSignalsHelp: 'Optionele waarnemingen die in de omgeving aanwezig zijn (een plas, een verkeerd staande klep, een vreemd geluid). De deelnemer ziet ze altijd zodra hij op de juiste locatie/fase is — de vraag is of hij ze oppikt, en of hij significante signalen onderscheidt van afleiders. Onafhankelijk van de afwijking-toggle. <em>Tip: je kunt ook per-locatie bewerken via de tab Locaties — daar zie je voor elke locatie alleen de signalen op die plek.</em>',
-      actionLog: 'Deelnemer-actielog',
-      actionLogHelp: "Een eenvoudig kladblok waarin de deelnemer zelf kan noteren wat hij doet en wanneer. Geen tijdregistratie door het systeem — de deelnemer schrijft zelf '11:42 — manometer trilling gemeld bij CRO'. Wordt meegenomen in de debrief.",
-      actionLogEnabled: 'Actielog beschikbaar voor deelnemer',
+      actionLog: 'Opmerkingen / bevindingen deelnemer',
+      actionLogHelp: "Een kladblok waarin de deelnemer opmerkingen of bevindingen over dít scenario kan noteren (bv. onduidelijke of foute stappen, suggesties). Dient als evaluatie vanuit de deelnemer en wordt in de debrief geregistreerd, zodat je scenario's kunt verbeteren.",
+      actionLogEnabled: 'Opmerkingen-veld beschikbaar voor deelnemer',
       actionLogPlaceholderLabel: 'Placeholder-tekst',
-      actionLogPlaceholderHint: "bv. 'Tijd en actie'",
+      actionLogPlaceholderHint: "bv. 'Opmerking over een stap of de procedure'",
       stepLabel: 'Stap',
       idLabel: 'ID',
       stepPhase: 'Fase', stepPhaseHint: 'verplaatst de stap',
@@ -1446,9 +1447,9 @@ const I18N = {
       refReference: 'Referentie', refReferencePlaceholder: "bv. 'EMG-PRC-008 rev 2'",
       refSummary: 'Samenvatting',
       refGuidelines: 'Kernpunten / guidelines', refGuidelinesHint: 'één per regel',
-      actionLog: 'Deelnemer-actielog',
-      actionLogHelp: "Een eenvoudig kladblok waarin de deelnemer zelf kan noteren wat hij doet en wanneer. Geen tijdregistratie door het systeem — de deelnemer schrijft zelf '13:42 — teruggetrokken naar veilige positie'. Wordt meegenomen in de debrief.",
-      actionLogPlaceholderHint: "bv. 'Tijd en actie (bv. '13:42 — bovenwinds gepositioneerd')'",
+      actionLog: 'Opmerkingen / bevindingen deelnemer',
+      actionLogHelp: "Een kladblok waarin de deelnemer opmerkingen of bevindingen over dít scenario kan noteren (bv. onduidelijke of foute stappen, suggesties). Dient als evaluatie vanuit de deelnemer en wordt in de debrief geregistreerd, zodat je scenario's kunt verbeteren.",
+      actionLogPlaceholderHint: "bv. 'Opmerking over een stap of de procedure'",
     },
     signals: {
       fromActionLabel: 'Verschijnt vanaf actie',
@@ -1754,13 +1755,14 @@ const I18N = {
       impInjectAfter: 'Modified — becomes visible to the participant',
       impInjectApply: 'Apply to the SOP',
       impInjectEmpty: 'The AI returned no usable proposal.',
+      impRestore: 'Restore original step (and remove this imperfection)',
       envSignals: 'Environmental signals',
       envSignalsHelp: 'Optional observations present in the environment (a puddle, a wrongly set valve, a strange noise). The participant always sees them once they are at the right location/phase — the question is whether they pick up on them, and whether they distinguish significant signals from distractors. Independent of the deviation toggle. <em>Tip: you can also edit per location via the Locations tab — there you see, for each location, only the signals in that spot.</em>',
-      actionLog: 'Participant action log',
-      actionLogHelp: "A simple notepad in which the participant can note what they do and when. No time logging by the system — the participant writes '11:42 — reported pressure-gauge vibration to CRO' themselves. Included in the debrief.",
-      actionLogEnabled: 'Action log available to participant',
+      actionLog: 'Participant remarks / findings',
+      actionLogHelp: "A notepad in which the participant can jot down remarks or findings about this scenario (e.g. unclear or incorrect steps, suggestions). Serves as participant feedback and is recorded in the debrief so you can improve scenarios.",
+      actionLogEnabled: 'Remarks field available to participant',
       actionLogPlaceholderLabel: 'Placeholder text',
-      actionLogPlaceholderHint: "e.g. 'Time and action'",
+      actionLogPlaceholderHint: "e.g. 'Remark about a step or the procedure'",
       stepLabel: 'Step',
       idLabel: 'ID',
       stepPhase: 'Phase', stepPhaseHint: 'moves the step',
@@ -1857,9 +1859,9 @@ const I18N = {
       refReference: 'Reference', refReferencePlaceholder: "e.g. 'EMG-PRC-008 rev 2'",
       refSummary: 'Summary',
       refGuidelines: 'Key points / guidelines', refGuidelinesHint: 'one per line',
-      actionLog: 'Participant action log',
-      actionLogHelp: "A simple notepad in which the participant can note what they do and when. No time logging by the system — the participant writes '13:42 — withdrew to safe position' themselves. Included in the debrief.",
-      actionLogPlaceholderHint: "e.g. 'Time and action (e.g. '13:42 — positioned upwind')'",
+      actionLog: 'Participant remarks / findings',
+      actionLogHelp: "A notepad in which the participant can jot down remarks or findings about this scenario (e.g. unclear or incorrect steps, suggestions). Serves as participant feedback and is recorded in the debrief so you can improve scenarios.",
+      actionLogPlaceholderHint: "e.g. 'Remark about a step or the procedure'",
     },
     signals: {
       fromActionLabel: 'Appears from action',
@@ -2165,13 +2167,14 @@ const I18N = {
       impInjectAfter: 'Geändert — wird für den Teilnehmer sichtbar',
       impInjectApply: 'Auf die SOP anwenden',
       impInjectEmpty: 'Die KI lieferte keinen brauchbaren Vorschlag.',
+      impRestore: 'Originalschritt wiederherstellen (und diesen Mangel entfernen)',
       envSignals: 'Umgebungssignale',
       envSignalsHelp: 'Optionale Wahrnehmungen in der Umgebung (eine Pfütze, ein falsch stehendes Ventil, ein seltsames Geräusch). Der Teilnehmer sieht sie immer, sobald er am richtigen Standort/in der richtigen Phase ist — die Frage ist, ob er sie aufgreift und signifikante Signale von Ablenkern unterscheidet. Unabhängig vom Abweichungs-Schalter. <em>Tipp: Sie können auch pro Standort über den Tab Standorte bearbeiten — dort sehen Sie für jeden Standort nur die Signale an diesem Ort.</em>',
-      actionLog: 'Teilnehmer-Aktionsprotokoll',
-      actionLogHelp: "Ein einfaches Notizfeld, in dem der Teilnehmer selbst notieren kann, was er wann tut. Keine Zeiterfassung durch das System — der Teilnehmer schreibt selbst '11:42 — Manometer-Vibration an CRO gemeldet'. Wird im Debrief berücksichtigt.",
-      actionLogEnabled: 'Aktionsprotokoll für Teilnehmer verfügbar',
+      actionLog: 'Anmerkungen / Beobachtungen des Teilnehmers',
+      actionLogHelp: "Ein Notizfeld, in dem der Teilnehmer Anmerkungen oder Beobachtungen zu diesem Szenario festhalten kann (z. B. unklare oder fehlerhafte Schritte, Vorschläge). Dient als Feedback des Teilnehmers und wird im Debrief erfasst, damit Sie Szenarien verbessern können.",
+      actionLogEnabled: 'Anmerkungsfeld für Teilnehmer verfügbar',
       actionLogPlaceholderLabel: 'Platzhaltertext',
-      actionLogPlaceholderHint: "z. B. 'Zeit und Aktion'",
+      actionLogPlaceholderHint: "z. B. 'Anmerkung zu einem Schritt oder Verfahren'",
       stepLabel: 'Schritt',
       idLabel: 'ID',
       stepPhase: 'Phase', stepPhaseHint: 'verschiebt den Schritt',
@@ -2268,9 +2271,9 @@ const I18N = {
       refReference: 'Referenz', refReferencePlaceholder: "z. B. 'EMG-PRC-008 Rev. 2'",
       refSummary: 'Zusammenfassung',
       refGuidelines: 'Kernpunkte / Richtlinien', refGuidelinesHint: 'einer pro Zeile',
-      actionLog: 'Teilnehmer-Aktionsprotokoll',
-      actionLogHelp: "Ein einfaches Notizfeld, in dem der Teilnehmer selbst notieren kann, was er wann tut. Keine Zeiterfassung durch das System — der Teilnehmer schreibt selbst '13:42 — auf sichere Position zurückgezogen'. Wird im Debrief berücksichtigt.",
-      actionLogPlaceholderHint: "z. B. 'Zeit und Aktion (z. B. '13:42 — luvseitig positioniert')'",
+      actionLog: 'Anmerkungen / Beobachtungen des Teilnehmers',
+      actionLogHelp: "Ein Notizfeld, in dem der Teilnehmer Anmerkungen oder Beobachtungen zu diesem Szenario festhalten kann (z. B. unklare oder fehlerhafte Schritte, Vorschläge). Dient als Feedback des Teilnehmers und wird im Debrief erfasst, damit Sie Szenarien verbessern können.",
+      actionLogPlaceholderHint: "z. B. 'Anmerkung zu einem Schritt oder Verfahren'",
     },
     signals: {
       fromActionLabel: 'Erscheint ab Aktion',
@@ -2576,13 +2579,14 @@ const I18N = {
       impInjectAfter: 'Modificado — será visible para el participante',
       impInjectApply: 'Aplicar al SOP',
       impInjectEmpty: 'La IA no devolvió ninguna propuesta utilizable.',
+      impRestore: 'Restaurar paso original (y eliminar esta imperfección)',
       envSignals: 'Señales del entorno',
       envSignalsHelp: 'Observaciones opcionales presentes en el entorno (un charco, una válvula mal posicionada, un ruido extraño). El participante siempre las ve en cuanto está en la ubicación/fase correcta — la cuestión es si las capta y si distingue las señales significativas de los distractores. Independiente del interruptor de desviación. <em>Consejo: también puede editar por ubicación desde la pestaña Ubicaciones — allí ve, para cada ubicación, solo las señales de ese lugar.</em>',
-      actionLog: 'Registro de acciones del participante',
-      actionLogHelp: "Un bloc de notas sencillo en el que el participante puede anotar qué hace y cuándo. El sistema no registra el tiempo — el propio participante escribe '11:42 — vibración del manómetro notificada al CRO'. Se incluye en el debrief.",
-      actionLogEnabled: 'Registro de acciones disponible para el participante',
+      actionLog: 'Observaciones / hallazgos del participante',
+      actionLogHelp: "Un bloc de notas donde el participante puede anotar observaciones o hallazgos sobre este escenario (p. ej. pasos poco claros o incorrectos, sugerencias). Sirve como feedback del participante y se registra en el debrief para que puedas mejorar los escenarios.",
+      actionLogEnabled: 'Campo de observaciones disponible para el participante',
       actionLogPlaceholderLabel: 'Texto de marcador',
-      actionLogPlaceholderHint: "p. ej. 'Hora y acción'",
+      actionLogPlaceholderHint: "p. ej. 'Observación sobre un paso o el procedimiento'",
       stepLabel: 'Paso',
       idLabel: 'ID',
       stepPhase: 'Fase', stepPhaseHint: 'mueve el paso',
@@ -2679,9 +2683,9 @@ const I18N = {
       refReference: 'Referencia', refReferencePlaceholder: "p. ej. 'EMG-PRC-008 rev 2'",
       refSummary: 'Resumen',
       refGuidelines: 'Puntos clave / directrices', refGuidelinesHint: 'uno por línea',
-      actionLog: 'Registro de acciones del participante',
-      actionLogHelp: "Un bloc de notas sencillo en el que el participante puede anotar qué hace y cuándo. El sistema no registra el tiempo — el propio participante escribe '13:42 — retirado a posición segura'. Se incluye en el debrief.",
-      actionLogPlaceholderHint: "p. ej. 'Hora y acción (p. ej. '13:42 — posicionado a barlovento')'",
+      actionLog: 'Observaciones / hallazgos del participante',
+      actionLogHelp: "Un bloc de notas donde el participante puede anotar observaciones o hallazgos sobre este escenario (p. ej. pasos poco claros o incorrectos, sugerencias). Sirve como feedback del participante y se registra en el debrief para que puedas mejorar los escenarios.",
+      actionLogPlaceholderHint: "p. ej. 'Observación sobre un paso o el procedimiento'",
     },
     signals: {
       fromActionLabel: 'Aparece a partir de la acción',
@@ -2978,7 +2982,7 @@ function newProceduralScenario() {
     observableSignals: [],            // statische omgevingssignalen, zie SIGNIFICANCE_LEVELS
     participantActionLog: {
       enabled: true,
-      placeholder: "Tijd en actie (bv. '11:42 — manometer trilling gemeld bij CRO')",
+      placeholder: "Opmerking of bevinding over dit scenario (bv. 'stap 2 lijkt in de verkeerde volgorde te staan')",
     },
     holdPoints: [],
     instructor: {
@@ -3062,7 +3066,7 @@ function newIncidentScenario() {
     observableSignals: [],            // statische omgevingssignalen, zie SIGNIFICANCE_LEVELS
     participantActionLog: {
       enabled: true,
-      placeholder: "Tijd en actie (bv. '13:42 — teruggetrokken naar bovenwindse positie')",
+      placeholder: "Opmerking of bevinding over dit scenario (bv. 'situatie was onduidelijk bij aankomst')",
     },
     referenceProcedure: {
       title: '',
@@ -5289,6 +5293,7 @@ function renderImperfectionsSection() {
             <div class="array-item-actions">
               <button class="btn-icon" onclick="arrayMove('sopImperfections', ${i}, -1)">↑</button>
               <button class="btn-icon" onclick="arrayMove('sopImperfections', ${i}, 1)">↓</button>
+              ${(imp.originalLabel || imp.originalInstruction) ? `<button class="btn-icon" title="${escapeAttr(t('taak.impRestore'))}" onclick="restoreImperfectionStep(${i})">↩</button>` : ''}
               <button class="btn-icon danger" onclick="arrayRemove('sopImperfections', ${i})">✕</button>
             </div>
           </div>
@@ -5532,9 +5537,27 @@ function applyImperfectionDraft() {
     consequenceDescription: r.consequenceDescription || '',
     detectionCriteria: r.detectionCriteria || '',
     severity: 2,
+    originalLabel: (d.original && d.original.label) || '',
+    originalInstruction: (d.original && d.original.instruction) || '',
   });
   STATE._impDraft = null;
   closeImperfectionInjectModal();
+  markUnsaved();
+  renderTab(STATE.currentTab);
+}
+
+// Zet de (AI-geïnjecteerde) stap terug naar de bewaarde originele tekst en verwijder het record.
+function restoreImperfectionStep(i) {
+  const sc = STATE.current;
+  if (!sc || !Array.isArray(sc.sopImperfections)) return;
+  const imp = sc.sopImperfections[i];
+  if (!imp) return;
+  const step = (sc.sop?.steps || []).find(s => s.id === imp.stepId);
+  if (step) {
+    if (imp.originalLabel) step.label = imp.originalLabel;
+    if (imp.originalInstruction) step.instruction = imp.originalInstruction;
+  }
+  sc.sopImperfections.splice(i, 1);
   markUnsaved();
   renderTab(STATE.currentTab);
 }
