@@ -4914,7 +4914,7 @@ function parseSopStepsJSON(text) {
   let arr;
   try { arr = JSON.parse(raw); } catch (e) { return []; }
   if (!Array.isArray(arr)) return [];
-  const validPhase = ['prep', 'execute', 'secure'];
+  const validPhase = ['prep', 'execute'];   // geen 'secure' bij AI-structurering: secure/onbekend → 'execute'
   return arr
     .filter(s => s && typeof s === 'object')
     .map(s => ({
@@ -4951,7 +4951,7 @@ async function structureSopFromSource() {
     const prompt = `Je bent een veiligheidskundige die een Standard Operating Procedure (SOP) omzet naar gestructureerde uitvoeringsstappen voor een trainingsscenario voor veldoperators.
 
 Hieronder staat ruwe SOP-tekst (mogelijk een uitgeklede of samengevatte versie). Zet hem om naar een JSON-array van stap-objecten. Elk object heeft EXACT deze velden:
-- "phase": exact één van "prep" (voorbereiding), "execute" (uitvoering) of "secure" (veiligstellen)
+- "phase": exact één van "prep" (voorbereiding) of "execute" (uitvoering). Gebruik GEEN andere fase; reken afrond-/veiligstel-handelingen mee tot "execute"
 - "order": geheel getal, oplopend en bij 1 beginnend BINNEN elke fase
 - "label": korte titel van de stap (max ~8 woorden)
 - "instruction": de concrete handeling in 1-2 zinnen, gebiedende wijs
@@ -4959,7 +4959,7 @@ Hieronder staat ruwe SOP-tekst (mogelijk een uitgeklede of samengevatte versie).
 - "lsrTags": array van strings. ${lsrLine}
 
 Regels:
-- Deel stappen logisch in over prep/execute/secure op basis van de inhoud.
+- Deel stappen logisch in over ALLEEN prep en execute op basis van de inhoud; een aparte veiligstel-fase bestaat hier niet.
 - Verzin GEEN stappen die niet in de tekst staan; vat alleen samen en structureer.
 - Schrijf in dezelfde taal als de SOP-tekst.
 - Antwoord met UITSLUITEND de JSON-array. Geen uitleg, geen code-fences.
