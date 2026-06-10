@@ -1307,6 +1307,7 @@ const I18N = {
       sopStructAppend: 'Toevoegen aan bestaande',
       sopStructCancel: 'Annuleren',
       sopStructCount: '{n} stap(pen) voorgesteld',
+      sopStructFillActions: 'Ook voorbereidings- en uitvoerings-acties invullen uit de stappen (label = staptitel; bij uitvoering ook criterium = verwachte melding)',
       envSignals: 'Omgevingssignalen',
       envSignalsHelp: 'Optionele waarnemingen die in de omgeving aanwezig zijn (een plas, een verkeerd staande klep, een vreemd geluid). De deelnemer ziet ze altijd zodra hij op de juiste locatie/fase is — de vraag is of hij ze oppikt, en of hij significante signalen onderscheidt van afleiders. Onafhankelijk van de afwijking-toggle. <em>Tip: je kunt ook per-locatie bewerken via de tab Locaties — daar zie je voor elke locatie alleen de signalen op die plek.</em>',
       actionLog: 'Deelnemer-actielog',
@@ -1682,6 +1683,7 @@ const I18N = {
       sopStructAppend: 'Add to existing',
       sopStructCancel: 'Cancel',
       sopStructCount: '{n} step(s) proposed',
+      sopStructFillActions: 'Also fill preparation and execution actions from the steps (label = step title; for execution also criterion = expected report)',
       envSignals: 'Environmental signals',
       envSignalsHelp: 'Optional observations present in the environment (a puddle, a wrongly set valve, a strange noise). The participant always sees them once they are at the right location/phase — the question is whether they pick up on them, and whether they distinguish significant signals from distractors. Independent of the deviation toggle. <em>Tip: you can also edit per location via the Locations tab — there you see, for each location, only the signals in that spot.</em>',
       actionLog: 'Participant action log',
@@ -2057,6 +2059,7 @@ const I18N = {
       sopStructAppend: 'Zu bestehenden hinzufügen',
       sopStructCancel: 'Abbrechen',
       sopStructCount: '{n} Schritt(e) vorgeschlagen',
+      sopStructFillActions: 'Auch Vorbereitungs- und Ausführungsaktionen aus den Schritten füllen (Label = Schritttitel; bei Ausführung auch Kriterium = erwartete Meldung)',
       envSignals: 'Umgebungssignale',
       envSignalsHelp: 'Optionale Wahrnehmungen in der Umgebung (eine Pfütze, ein falsch stehendes Ventil, ein seltsames Geräusch). Der Teilnehmer sieht sie immer, sobald er am richtigen Standort/in der richtigen Phase ist — die Frage ist, ob er sie aufgreift und signifikante Signale von Ablenkern unterscheidet. Unabhängig vom Abweichungs-Schalter. <em>Tipp: Sie können auch pro Standort über den Tab Standorte bearbeiten — dort sehen Sie für jeden Standort nur die Signale an diesem Ort.</em>',
       actionLog: 'Teilnehmer-Aktionsprotokoll',
@@ -2432,6 +2435,7 @@ const I18N = {
       sopStructAppend: 'Añadir a los existentes',
       sopStructCancel: 'Cancelar',
       sopStructCount: '{n} paso(s) propuesto(s)',
+      sopStructFillActions: 'Rellenar también las acciones de preparación y ejecución a partir de los pasos (etiqueta = título del paso; en ejecución también criterio = reporte esperado)',
       envSignals: 'Señales del entorno',
       envSignalsHelp: 'Observaciones opcionales presentes en el entorno (un charco, una válvula mal posicionada, un ruido extraño). El participante siempre las ve en cuanto está en la ubicación/fase correcta — la cuestión es si las capta y si distingue las señales significativas de los distractores. Independiente del interruptor de desviación. <em>Consejo: también puede editar por ubicación desde la pestaña Ubicaciones — allí ve, para cada ubicación, solo las señales de ese lugar.</em>',
       actionLog: 'Registro de acciones del participante',
@@ -5004,6 +5008,7 @@ function openSopDraftModal(steps) {
   closeSopDraftModal();
 
   const phaseName = { prep: 'Voorbereiding', execute: 'Uitvoering', secure: 'Veiligstellen' };
+  const actionableHas = steps.some(s => s.phase === 'prep' || s.phase === 'execute');
   const rows = ['prep', 'execute', 'secure'].map(ph => {
     const inPhase = steps.filter(s => s.phase === ph);
     if (!inPhase.length) return '';
@@ -5028,6 +5033,10 @@ function openSopDraftModal(steps) {
       </div>
       <div style="padding:14px 20px;overflow:auto;flex:1">
         <div style="font-size:12px;opacity:.8;margin-bottom:12px;padding:8px 10px;border-left:3px solid var(--accent,#e0a93b);background:var(--bg-soft,#1c1c1c)">${escapeHtml(t('taak.sopStructDisclaimer'))}</div>
+        ${actionableHas ? `<label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;margin-bottom:14px;cursor:pointer">
+          <input type="checkbox" id="sop-draft-fill-actions" checked style="margin-top:2px">
+          <span>${escapeHtml(t('taak.sopStructFillActions'))}</span>
+        </label>` : ''}
         ${rows}
       </div>
       <div style="padding:14px 20px;border-top:1px solid var(--border,#444);display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
@@ -5062,6 +5071,25 @@ function applySopDraft(mode) {
       expectedAction: s.expectedAction, lsrTags: s.lsrTags || [],
     });
   });
+
+  // Optioneel: voorbereidings- en uitvoerings-acties vullen uit de stappen.
+  // Prep-actie = alleen label (deelnemer vinkt zelf af). Execute-actie =
+  // label (staptitel) + completionCriterion (verwachte radiomelding, voor de AI).
+  const fillCb = document.getElementById('sop-draft-fill-actions');
+  if (fillCb && fillCb.checked) {
+    if (!sc.assignment) sc.assignment = { title: '', prepActions: [], executeActions: [], secureAdvice: '' };
+    if (!Array.isArray(sc.assignment.prepActions)) sc.assignment.prepActions = [];
+    if (!Array.isArray(sc.assignment.executeActions)) sc.assignment.executeActions = [];
+    if (mode === 'replace') { sc.assignment.prepActions = []; sc.assignment.executeActions = []; }
+    draft.filter(s => s.phase === 'prep').forEach(s => {
+      sc.assignment.prepActions.push({ id: uid('a'), label: s.label });
+    });
+    draft.filter(s => s.phase === 'execute').forEach(s => {
+      sc.assignment.executeActions.push({
+        id: uid('e'), label: s.label, completionCriterion: s.expectedAction || '',
+      });
+    });
+  }
 
   STATE._sopDraft = null;
   closeSopDraftModal();
