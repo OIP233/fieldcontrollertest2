@@ -897,6 +897,45 @@ select {
   padding: 2px 0;
 }
 
+/* ───── Sub-tabs binnen de Taak-tab ───── */
+.subtab-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-sunk);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 4px;
+  margin-bottom: 20px;
+}
+.subtab-btn {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 9px 8px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.subtab-btn:hover { color: var(--text-bright); background: var(--accent-soft); }
+.subtab-btn.active { color: var(--text-bright); background: var(--surface); box-shadow: var(--shadow-sm); }
+.subtab-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
 /* ───── Phase blocks (Taak & procedure) ───── */
 .phase-block {
   background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
@@ -1344,6 +1383,14 @@ const I18N = {
       impInjectApply: 'Toepassen op de SOP',
       impInjectEmpty: 'De AI leverde geen bruikbaar voorstel.',
       impRestore: 'Herstel originele stap (en verwijder deze onvolkomenheid)',
+      subSop: 'Opdracht & SOP',
+      subPhases: 'Fases & stappen',
+      subImp: 'Onvolkomenheden',
+      subSignals: 'Signalen & feedback',
+      bronsopFilled: 'ingevuld',
+      envSignalsReadonly: 'Overzicht (alleen-lezen). Omgevingssignalen bewerk je per locatie in de tab Locaties.',
+      envSignalsManage: 'Beheer signalen in Locaties →',
+      envSignalsNoLoc: '(geen locatie)',
       envSignals: 'Omgevingssignalen',
       envSignalsHelp: 'Optionele waarnemingen die in de omgeving aanwezig zijn (een plas, een verkeerd staande klep, een vreemd geluid). De deelnemer ziet ze altijd zodra hij op de juiste locatie/fase is — de vraag is of hij ze oppikt, en of hij significante signalen onderscheidt van afleiders. Onafhankelijk van de afwijking-toggle. <em>Tip: je kunt ook per-locatie bewerken via de tab Locaties — daar zie je voor elke locatie alleen de signalen op die plek.</em>',
       actionLog: 'Opmerkingen / bevindingen deelnemer',
@@ -1756,6 +1803,14 @@ const I18N = {
       impInjectApply: 'Apply to the SOP',
       impInjectEmpty: 'The AI returned no usable proposal.',
       impRestore: 'Restore original step (and remove this imperfection)',
+      subSop: 'Assignment & SOP',
+      subPhases: 'Phases & steps',
+      subImp: 'Imperfections',
+      subSignals: 'Signals & feedback',
+      bronsopFilled: 'filled in',
+      envSignalsReadonly: 'Overview (read-only). Edit environment signals per location in the Locations tab.',
+      envSignalsManage: 'Manage signals in Locations →',
+      envSignalsNoLoc: '(no location)',
       envSignals: 'Environmental signals',
       envSignalsHelp: 'Optional observations present in the environment (a puddle, a wrongly set valve, a strange noise). The participant always sees them once they are at the right location/phase — the question is whether they pick up on them, and whether they distinguish significant signals from distractors. Independent of the deviation toggle. <em>Tip: you can also edit per location via the Locations tab — there you see, for each location, only the signals in that spot.</em>',
       actionLog: 'Participant remarks / findings',
@@ -2168,6 +2223,14 @@ const I18N = {
       impInjectApply: 'Auf die SOP anwenden',
       impInjectEmpty: 'Die KI lieferte keinen brauchbaren Vorschlag.',
       impRestore: 'Originalschritt wiederherstellen (und diesen Mangel entfernen)',
+      subSop: 'Auftrag & SOP',
+      subPhases: 'Phasen & Schritte',
+      subImp: 'Mängel',
+      subSignals: 'Signale & Feedback',
+      bronsopFilled: 'ausgefüllt',
+      envSignalsReadonly: 'Übersicht (schreibgeschützt). Umgebungssignale bearbeiten Sie je Standort im Tab Standorte.',
+      envSignalsManage: 'Signale unter Standorte verwalten →',
+      envSignalsNoLoc: '(kein Standort)',
       envSignals: 'Umgebungssignale',
       envSignalsHelp: 'Optionale Wahrnehmungen in der Umgebung (eine Pfütze, ein falsch stehendes Ventil, ein seltsames Geräusch). Der Teilnehmer sieht sie immer, sobald er am richtigen Standort/in der richtigen Phase ist — die Frage ist, ob er sie aufgreift und signifikante Signale von Ablenkern unterscheidet. Unabhängig vom Abweichungs-Schalter. <em>Tipp: Sie können auch pro Standort über den Tab Standorte bearbeiten — dort sehen Sie für jeden Standort nur die Signale an diesem Ort.</em>',
       actionLog: 'Anmerkungen / Beobachtungen des Teilnehmers',
@@ -2580,6 +2643,14 @@ const I18N = {
       impInjectApply: 'Aplicar al SOP',
       impInjectEmpty: 'La IA no devolvió ninguna propuesta utilizable.',
       impRestore: 'Restaurar paso original (y eliminar esta imperfección)',
+      subSop: 'Tarea & SOP',
+      subPhases: 'Fases y pasos',
+      subImp: 'Imperfecciones',
+      subSignals: 'Señales y feedback',
+      bronsopFilled: 'rellenado',
+      envSignalsReadonly: 'Resumen (solo lectura). Edita las señales del entorno por ubicación en la pestaña Ubicaciones.',
+      envSignalsManage: 'Gestionar señales en Ubicaciones →',
+      envSignalsNoLoc: '(sin ubicación)',
       envSignals: 'Señales del entorno',
       envSignalsHelp: 'Observaciones opcionales presentes en el entorno (un charco, una válvula mal posicionada, un ruido extraño). El participante siempre las ve en cuanto está en la ubicación/fase correcta — la cuestión es si las capta y si distingue las señales significativas de los distractores. Independiente del interruptor de desviación. <em>Consejo: también puede editar por ubicación desde la pestaña Ubicaciones — allí ve, para cada ubicación, solo las señales de ese lugar.</em>',
       actionLog: 'Observaciones / hallazgos del participante',
@@ -4931,13 +5002,24 @@ TAB_RENDERERS.taak = function() {
     </div>
     ${directionBlock('secure')}`;
 
-  // ===== eindmontage =====
-  return `
+  // ===== eindmontage — sub-tabs binnen de Taak-tab =====
+  const sub = STATE._taakSub || 'sop';
+  const impCount = (sc.sopImperfections || []).length;
+  const sigCount = (sc.observableSignals || []).length;
+
+  const subnav = `
+    <div class="subtab-nav">
+      <button class="subtab-btn ${sub === 'sop' ? 'active' : ''}" onclick="switchTaakSub('sop')">${t('taak.subSop')}</button>
+      <button class="subtab-btn ${sub === 'phases' ? 'active' : ''}" onclick="switchTaakSub('phases')">${t('taak.subPhases')}</button>
+      <button class="subtab-btn ${sub === 'imp' ? 'active' : ''}" onclick="switchTaakSub('imp')">${t('taak.subImp')}${impCount ? ` <span class="subtab-badge">${impCount}</span>` : ''}</button>
+      <button class="subtab-btn ${sub === 'signals' ? 'active' : ''}" onclick="switchTaakSub('signals')">${t('taak.subSignals')}${sigCount ? ` <span class="subtab-badge">${sigCount}</span>` : ''}</button>
+    </div>`;
+
+  // — Groep 1: Opdracht & SOP (Bron-SOP nu inklapbaar) —
+  const sopGroup = `
     <div class="section">
       <div class="section-title">${t('taak.headTitle')}</div>
-      <div class="section-help">
-        ${t('taak.intro')}
-      </div>
+      <div class="section-help">${t('taak.intro')}</div>
       <div class="form-group">
         <label class="field-label">${t('taak.assignmentTitle')} <span class="hint">${t('taak.assignmentTitleHint')}</span></label>
         <input type="text" value="${escapeAttr(a.title || '')}" oninput="updateField('assignment.title', this.value)">
@@ -4956,31 +5038,39 @@ TAB_RENDERERS.taak = function() {
         <label class="field-label">${t('taak.sopSummary')}</label>
         <textarea rows="2" oninput="updateField('sop.summary', this.value)">${escapeHtml(sc.sop?.summary || '')}</textarea>
       </div>
-      <div class="form-group">
-        <label class="field-label">${t('taak.sopSourceLabel')}</label>
-        <textarea rows="6" oninput="updateField('sop.sourceText', this.value)">${escapeHtml(sc.sop?.sourceText || '')}</textarea>
-        <div class="hint" style="margin-top:4px">${t('taak.sopSourceHint')}</div>
-        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <button type="button" class="btn" onclick="importSopSourceFile()">${t('taak.sopSourceUpload')}</button>
-          <button type="button" id="sop-structure-btn" class="btn btn-primary" onclick="structureSopFromSource()">${t('taak.sopStructBtn')}</button>
-        </div>
-      </div>
     </div>
 
+    <details class="phase-block" ${STATE._taakOpen['bronsop'] ? 'open' : ''} ontoggle="onPhaseToggle('bronsop', this.open)">
+      <summary class="phase-summary">
+        <span class="chevron">▶</span>
+        <span class="phase-name">${t('taak.sopSourceLabel')}</span>
+        <span class="phase-meta">${(sc.sop?.sourceText || '').trim() ? t('taak.bronsopFilled') : ''}</span>
+      </summary>
+      <div class="phase-body">
+        <div class="form-group">
+          <textarea rows="6" oninput="updateField('sop.sourceText', this.value)">${escapeHtml(sc.sop?.sourceText || '')}</textarea>
+          <div class="hint" style="margin-top:4px">${t('taak.sopSourceHint')}</div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button type="button" class="btn" onclick="importSopSourceFile()">${t('taak.sopSourceUpload')}</button>
+            <button type="button" id="sop-structure-btn" class="btn btn-primary" onclick="structureSopFromSource()">${t('taak.sopStructBtn')}</button>
+          </div>
+        </div>
+      </div>
+    </details>`;
+
+  // — Groep 2: Fases & stappen —
+  const phasesGroup = `
     ${phaseBlock('prep', 1, dictPhaseProc()['prep'], prepBody, t('taak.metaStepsActions', { steps: prep.count, actions: prepActs.length }))}
     ${phaseBlock('execute', 2, dictPhaseProc()['execute'], execBody, t('taak.metaStepsActions', { steps: exec.count, actions: execActs.length }))}
     ${phaseBlock('deviation', 3, dictPhaseProc()['deviation'], devBody, devEnabled ? (sc.deviation?.triggerAfterStepId ? t('taak.devTriggerSet') : t('taak.devNoTrigger')) : t('taak.devOff'))}
-    ${phaseBlock('secure', 4, dictPhaseProc()['secure'], secureBody, t('taak.metaSteps', { steps: secure.count }))}
+    ${phaseBlock('secure', 4, dictPhaseProc()['secure'], secureBody, t('taak.metaSteps', { steps: secure.count }))}`;
 
-    ${renderImperfectionsSection()}
+  // — Groep 3: Onvolkomenheden —
+  const impGroup = renderImperfectionsSection();
 
-    <div class="section">
-      <div class="section-title">${t('taak.envSignals')}</div>
-      <div class="section-help">
-        ${t('taak.envSignalsHelp')}
-      </div>
-      ${renderObservableSignalsSection()}
-    </div>
+  // — Groep 4: Signalen & feedback —
+  const signalsGroup = `
+    ${renderSignalsSummary()}
 
     <div class="section">
       <div class="section-title">${t('taak.actionLog')}</div>
@@ -4993,9 +5083,20 @@ TAB_RENDERERS.taak = function() {
         <label class="field-label">${t('taak.actionLogPlaceholderLabel')}</label>
         <input type="text" value="${escapeAttr(sc.participantActionLog?.placeholder || '')}" oninput="updateField('participantActionLog.placeholder', this.value)" placeholder="${t('taak.actionLogPlaceholderHint')}">
       </div>
-    </div>
-  `;
+    </div>`;
+
+  return `
+    ${subnav}
+    ${sub === 'sop' ? sopGroup : ''}
+    ${sub === 'phases' ? phasesGroup : ''}
+    ${sub === 'imp' ? impGroup : ''}
+    ${sub === 'signals' ? signalsGroup : ''}`;
 };
+
+function switchTaakSub(id) {
+  STATE._taakSub = id;
+  renderTab('taak');
+}
 
 function onPhaseToggle(phase, isOpen) {
   STATE._taakOpen = STATE._taakOpen || {};
@@ -5887,6 +5988,52 @@ function renderFromActionField(signal, signalIdx) {
     <div class="form-group">
       <label class="field-label">${t('signals.fromActionLabel')} <span class="hint">${t('signals.fromActionHint')}</span></label>
       <select onchange="updateField('observableSignals.${signalIdx}.fromActionId', this.value)">${opts}</select>
+    </div>`;
+}
+
+// Read-only overzicht van de omgevingssignalen in de Taak-tab.
+// Bewerken gebeurt op één plek: per locatie in de Locaties-tab (geen dubbele invoer).
+function renderSignalsSummary() {
+  const sc = STATE.current;
+  const signals = sc.observableSignals || [];
+  const sigLabels = {}; dictSignificance().forEach(s => sigLabels[s.id] = s.label);
+  const sigColor = { significant: 'var(--red)', notable: 'var(--amber)', distractor: 'var(--text-dim)' };
+  const locName = (id) => { const l = (sc.locations || []).find(x => x.id === id); return l ? (l.label || l.id) : t('taak.envSignalsNoLoc'); };
+
+  const counts = { significant: 0, notable: 0, distractor: 0 };
+  signals.forEach(s => { if (counts[s.significance] !== undefined) counts[s.significance]++; });
+
+  let rows;
+  if (!signals.length) {
+    rows = `<div class="array-empty">${t('signals.emptyAll')}</div>`;
+  } else {
+    const byLoc = {};
+    signals.forEach(s => { const k = s.locationId || ''; (byLoc[k] = byLoc[k] || []).push(s); });
+    rows = Object.keys(byLoc).map(locId => {
+      const items = byLoc[locId].map(s => `
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--border)">
+          <span style="font-size:10px;font-family:var(--mono);padding:1px 7px;border-radius:999px;border:1px solid var(--border-strong);color:${sigColor[s.significance] || 'var(--text-dim)'}">${escapeHtml(sigLabels[s.significance] || s.significance || '')}</span>
+          <span style="font-size:11px;font-family:var(--mono);color:var(--text-dim)">${escapeHtml(dictPhaseProc()[s.phase] || s.phase || '')}</span>
+          <span style="font-size:12.5px;color:var(--text-2);flex:1">${escapeHtml((s.description || '').slice(0, 100))}</span>
+        </div>`).join('');
+      return `<div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:600;color:var(--accent)">${escapeHtml(locName(locId))} <span style="color:var(--text-dim);font-weight:400">· ${byLoc[locId].length}</span></div>
+        ${items}
+      </div>`;
+    }).join('');
+  }
+
+  const mix = signals.length ? t('signals.mix', { scope: '', sig: counts.significant, notable: counts.notable, dist: counts.distractor }) : '';
+
+  return `
+    <div class="section">
+      <div class="section-title">${t('taak.envSignals')}</div>
+      <div class="section-help">${t('taak.envSignalsReadonly')}</div>
+      ${mix ? `<div class="section-help" style="margin-bottom:12px"><strong>${escapeHtml(mix)}</strong></div>` : ''}
+      ${rows}
+      <div style="margin-top:12px">
+        <button class="btn btn-sm" onclick="switchTab('locaties')">${t('taak.envSignalsManage')}</button>
+      </div>
     </div>`;
 }
 
